@@ -10,6 +10,8 @@ import {
   getRevenue,
   getWorkingCapitalRatio,
 } from "../utils/calMetric";
+import { formatCurrency, formatPercentage } from "../utils/dataFormat";
+import { EACCOUNT_CURRENCY } from "../constants/account";
 
 const Container = styled.div`
   display: flex;
@@ -34,11 +36,13 @@ const MetricItem = styled.li`
 `;
 
 const accountData: IAccount[] = data.data;
-const revenue = getRevenue(accountData);
-const expense = getExpense(accountData);
-const grossProfitMargin = getGrossProfitMargin(accountData);
-const netProfitMargin = getNetProfitMargin(accountData);
-const workingCapitalRatio = getWorkingCapitalRatio(accountData);
+const revenue = formatCurrency(getRevenue(accountData), EACCOUNT_CURRENCY.AUD);
+const expense = formatCurrency(getExpense(accountData), EACCOUNT_CURRENCY.AUD);
+const grossProfitMargin = formatPercentage(getGrossProfitMargin(accountData));
+const netProfitMargin = formatPercentage(getNetProfitMargin(accountData));
+const workingCapitalRatio = formatPercentage(
+  getWorkingCapitalRatio(accountData)
+);
 
 function CommonMetrics() {
   return (

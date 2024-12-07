@@ -21,3 +21,7 @@ export enum EVALUE_TYPE {
   CREDIT = "credit",
   DEBIT = "debit",
 }
+
+export enum EACCOUNT_CURRENCY {
+  AUD = "AUD",
+}

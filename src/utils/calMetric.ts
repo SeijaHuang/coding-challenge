@@ -53,6 +53,5 @@ export function getWorkingCapitalRatio(accountData: IAccount[]): number {
   const liability =
     calTotalValue(accountData, LIABILITY_MINUEND_PARAMS) -
     calTotalValue(accountData, LIABILITY_SUBTRAHEND_PARAMS);
-  console.log(assets, liability);
   return (assets / liability) * 100;
 }

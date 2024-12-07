@@ -1,5 +1,8 @@
+import CommonMetrics from "./components/CommonMetrics";
+import "./App.css";
+
 function App() {
-  return <div>2</div>;
+  return <CommonMetrics />;
 }
 
 export default App;

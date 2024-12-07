@@ -19,6 +19,6 @@ export interface IAccount {
 
 export interface IAccountFilterOptions {
   account_category?: EACCOUNT_CATEGORY;
-  account_type?: EACCOUNT_TYPE;
+  account_type?: EACCOUNT_TYPE | EACCOUNT_TYPE[];
   value_type?: EVALUE_TYPE;
 }

@@ -38,6 +38,9 @@ function calTotalValue(
 ) {
   const filteredAccountData = accountData.filter((account) => {
     return Object.entries(filterOptions).every(([key, value]) => {
+      if (Array.isArray(value)) {
+        return value.includes(account[key as keyof IAccountFilterOptions]);
+      }
       return account[key as keyof IAccountFilterOptions] === value;
     });
   });
@@ -60,8 +63,44 @@ const grossProfitMagin =
   }) /
     revenue) *
   100;
-
 const netProfitMargin = ((revenue - expense) / revenue) * 100;
+const assets =
+  calTotalValue(accountData, {
+    account_category: EACCOUNT_CATEGORY.ASSETS,
+    value_type: EVALUE_TYPE.DEBIT,
+    account_type: [
+      EACCOUNT_TYPE.CURRENT,
+      EACCOUNT_TYPE.BANK,
+      EACCOUNT_TYPE.CURRENT_ACCOUNTS_RECEIVABLE,
+    ],
+  }) -
+  calTotalValue(accountData, {
+    account_category: EACCOUNT_CATEGORY.ASSETS,
+    value_type: EVALUE_TYPE.CREDIT,
+    account_type: [
+      EACCOUNT_TYPE.CURRENT,
+      EACCOUNT_TYPE.BANK,
+      EACCOUNT_TYPE.CURRENT_ACCOUNTS_RECEIVABLE,
+    ],
+  });
+const liability =
+  calTotalValue(accountData, {
+    account_category: EACCOUNT_CATEGORY.LIABILITY,
+    value_type: EVALUE_TYPE.CREDIT,
+    account_type: [
+      EACCOUNT_TYPE.CURRENT,
+      EACCOUNT_TYPE.CURRENT_ACCOUNTS_PAYABLE,
+    ],
+  }) -
+  calTotalValue(accountData, {
+    account_category: EACCOUNT_CATEGORY.LIABILITY,
+    value_type: EVALUE_TYPE.DEBIT,
+    account_type: [
+      EACCOUNT_TYPE.CURRENT,
+      EACCOUNT_TYPE.CURRENT_ACCOUNTS_PAYABLE,
+    ],
+  });
+const workingCapitalRatio = (assets / liability) * 100;
 function CommonMetrics() {
   return (
     <Container>
@@ -71,7 +110,7 @@ function CommonMetrics() {
         <MetricItem>{`${EMETRICS.EXPENSE}:${expense}`}</MetricItem>
         <MetricItem>{`${EMETRICS.GROSS_PROFIT_MARGIN}:${grossProfitMagin}`}</MetricItem>
         <MetricItem>{`${EMETRICS.NET_PROFIT_MARGIN}:${netProfitMargin}`}</MetricItem>
-        <MetricItem>{EMETRICS.WORKING_CAPITAL_RATIO}</MetricItem>
+        <MetricItem>{`${EMETRICS.WORKING_CAPITAL_RATIO}:${workingCapitalRatio}`}</MetricItem>
       </MetricsList>
     </Container>
   );

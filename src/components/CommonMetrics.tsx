@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 import { EMETRICS } from "../constants/metrics";
+import data from "../data.json";
+import { IAccount } from "../interface/account";
 
 const Container = styled.div`
   display: flex;
@@ -22,6 +24,10 @@ const MetricsList = styled.ul`
 const MetricItem = styled.li`
   font-size: 1rem;
 `;
+
+const accountData: IAccount[] = data.data;
+console.log(accountData);
+
 function CommonMetrics() {
   return (
     <Container>

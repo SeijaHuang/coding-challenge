@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { EMETRICS } from "../constants/metrics";
 
 const Container = styled.div`
   display: flex;
@@ -26,11 +27,11 @@ function CommonMetrics() {
     <Container>
       <Title>Five Common Accounting Metics</Title>
       <MetricsList>
-        <MetricItem>Revenue</MetricItem>
-        <MetricItem>Expenses</MetricItem>
-        <MetricItem>Profit</MetricItem>
-        <MetricItem>Assets</MetricItem>
-        <MetricItem>Liabilities</MetricItem>
+        <MetricItem>{EMETRICS.REVENUE}</MetricItem>
+        <MetricItem>{EMETRICS.EXPENSE}</MetricItem>
+        <MetricItem>{EMETRICS.GROSS_PROFIT_MARGIN}</MetricItem>
+        <MetricItem>{EMETRICS.NET_PROFIT_MARGIN}</MetricItem>
+        <MetricItem>{EMETRICS.WORKING_CAPITAL_RATIO}</MetricItem>
       </MetricsList>
     </Container>
   );

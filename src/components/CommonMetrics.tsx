@@ -61,6 +61,7 @@ const grossProfitMagin =
     revenue) *
   100;
 
+const netProfitMargin = ((revenue - expense) / revenue) * 100;
 function CommonMetrics() {
   return (
     <Container>
@@ -69,7 +70,7 @@ function CommonMetrics() {
         <MetricItem>{`${EMETRICS.REVENUE}:${revenue}`}</MetricItem>
         <MetricItem>{`${EMETRICS.EXPENSE}:${expense}`}</MetricItem>
         <MetricItem>{`${EMETRICS.GROSS_PROFIT_MARGIN}:${grossProfitMagin}`}</MetricItem>
-        <MetricItem>{EMETRICS.NET_PROFIT_MARGIN}</MetricItem>
+        <MetricItem>{`${EMETRICS.NET_PROFIT_MARGIN}:${netProfitMargin}`}</MetricItem>
         <MetricItem>{EMETRICS.WORKING_CAPITAL_RATIO}</MetricItem>
       </MetricsList>
     </Container>
